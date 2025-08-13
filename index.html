@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0d47a1">
+<title>Sao Việt</title>
+<style>
+body,html {margin:0;padding:0;height:100%;font-family:sans-serif;}
+header {background:#0d47a1;color:white;padding:10px;display:flex;align-items:center;}
+header img {height:24px;margin-right:8px;}
+iframe {border:none;width:100%;height:calc(100% - 50px);}
+.buttons {position:fixed;bottom:10px;right:10px;display:flex;gap:10px;}
+button {padding:10px;border:none;border-radius:5px;background:#0d47a1;color:white;font-size:14px;cursor:pointer;}
+</style>
+</head>
+<body>
+<header>
+    <img src="icon-192.png" alt="logo">
+    <h1 style="font-size:18px;">Sao Việt</h1>
+</header>
+<iframe src="https://script.google.com/macros/s/AKfycbxkAacxAfF_S2cgzsBQ2spzevrdMjWv2U9Xz2q-eZ-xTfOtD-idJAwgFVug0TKxEIIV/exec"></iframe>
+
+<div class="buttons">
+    <button onclick="copyLink()">Copy</button>
+    <button onclick="shareLink()">Share</button>
+</div>
+
+<script>
+const appLink = "https://script.google.com/macros/s/AKfycbxkAacxAfF_S2cgzsBQ2spzevrdMjWv2U9Xz2q-eZ-xTfOtD-idJAwgFVug0TKxEIIV/exec?mode=json";
+
+function copyLink() {
+    navigator.clipboard.writeText(appLink).then(() => {
+        alert("Đã copy link!");
+    });
+}
+
+function shareLink() {
+    if (navigator.share) {
+        navigator.share({
+            title: "Sao Việt",
+            text: "Xem dữ liệu từ Sao Việt",
+            url: appLink
+        }).catch(err => console.log(err));
+    } else {
+        alert("Trình duyệt không hỗ trợ chia sẻ!");
+    }
+}
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+</body>
+</html>
